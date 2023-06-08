@@ -16,3 +16,18 @@
     <link rel="stylesheet" href="user/css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="user/css/style.css">
+
+    <style>
+        .card-badge {
+            display: inline-block;
+            min-width: 2em;
+            padding: 0.3em;
+            border-radius: 50%;
+            font-size: 10px;
+            text-align: center;
+            background: #29a867;
+            color: #fefefe;
+            margin-left: -10px;
+        }
+
+    </style>

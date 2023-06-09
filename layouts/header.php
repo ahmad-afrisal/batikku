@@ -4,7 +4,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="user/img/logo.png" alt="logo"> </a>
+                        <a class="navbar-brand" href="index.php"> <img src="user/img/logo.png" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -28,13 +28,13 @@
                                             <?php if($_SESSION['roles'] == 'ADMIN') { ?>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                                     <a class="dropdown-item" href="backend/dashboard/dashboard.php"> Dashboard</a>
-                                                    <a class="dropdown-item" href="backend/users/dashboard-account.php"> Pengaturan</a>
+                                                    <a class="dropdown-item" href="backend/account/dashboard-account.php"> Pengaturan</a>
                                                     <a class="dropdown-item" href="logout.php"> Logout</a>
                                                 </div>
                                             <?php } else { ?>
                                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                                     <a class="dropdown-item" href="frontend/dashboard.php"> Dashboard</a>
-                                                    <a class="dropdown-item" href="frontend/users/dashboard-account.php"> Pengaturan</a>
+                                                    <a class="dropdown-item" href="frontend/dashboard-account.php"> Pengaturan</a>
                                                     <a class="dropdown-item" href="logout.php"> Logout</a>
                                                 </div>
                                             <?php } ?>

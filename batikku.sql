@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 07, 2023 at 01:40 PM
+-- Generation Time: Jun 09, 2023 at 08:31 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.9
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `carts` (
   `carts_id` int(11) NOT NULL,
   `users_id` int(25) NOT NULL,
-  `products_id` int(25) NOT NULL
+  `products_id` int(25) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -51,11 +52,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`categories_id`, `name_category`, `slug`, `photo`) VALUES
-(1, 'Makanan', 'makanan', '244060577_makanan.svg'),
-(2, 'Kain', 'kain', '537402405_kain.svg'),
-(3, 'Baju', 'baju', '1668815106_baju.svg'),
-(4, 'Celana', 'celana', '2062739558_celana.svg'),
-(6, 'Souvenir', 'souvenir', '1522619992_souvenir.svg');
+(1, 'Batik Tulis', 'batik-tulis', '457934551_4.png'),
+(2, 'Batik Cap', 'batik-cap', '4410149_1.png'),
+(3, 'Batik Sutra', 'batik-sutra', '1796539152_3.png'),
+(4, 'Batik Jawa', 'batik-jawa', '808887569_8.png'),
+(5, 'Batik Tulis', 'batik-tulis', '970770525_1.png');
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,7 @@ CREATE TABLE `products` (
   `price` int(25) NOT NULL,
   `description` text NOT NULL,
   `weight` float NOT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -79,9 +80,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`products_id`, `product_name`, `slug`, `categories_id`, `price`, `description`, `weight`, `stock`) VALUES
-(1, 'kain saqbe motif arajang', 'kain-saqbe-motif-arajang', 2, 100000, '<p>Salah satu produk tenun berbenang sutra adalah sarung sutra asal Suku Mandar yang mendiami wilayah Kabupaten Polewali Mandar (Polman) di Provinsi Sulawesi Barat. Tenun sarung sutra Mandar telah diproduksi sejak abad ke-16 serta dikenal memiliki kualitas halus dan tidak mudah luntur. Sarung sutra Mandar dikenal juga dengan sebutan lipa saqbe Mandar.</p>\r\n', 1, 6),
-(2, 'Bagea', 'bagea', 1, 1000, '<p>Kue bagea adalah kue yang berasal dari Ternate di Maluku Utara, Indonesia. Bentuknya bulat dan berwarna krem. Bagea memiliki konsistensi keras yang dapat dilunakkan dalam teh atau air, agar lebih mudah dikunyah. Ini disiapkan menggunakan sagu, pati nabati yang berasal dari pohon sagu atau sagu sikas</p>\r\n', 0.2, 98),
-(3, 'Jepa Mandar', 'jepa-mandar', 1, 2000, '<p>dfdgf</p>\r\n', 1, 20);
+(1, 'Batik Sutra Type A01', 'batik-sutra-type-a01', 3, 99000, '<p>Produk batik sutra Type A001 adalah karya seni yang memadukan keindahan batik tradisional dengan kemewahan sutra. Batik ini dirancang dengan detail yang halus dan motif yang elegan, menciptakan kesan yang anggun dan istimewa.</p>\r\n', 0.3, 10);
 
 -- --------------------------------------------------------
 
@@ -100,11 +99,9 @@ CREATE TABLE `product_galleries` (
 --
 
 INSERT INTO `product_galleries` (`galleries_id`, `products_id`, `photos`) VALUES
-(3, 1, '1728135775_gold-saqbe.png'),
-(4, 1, '1423618709_purple-saqbe.png'),
-(5, 2, '63bd0f4d9f55a-bagea-1.png'),
-(6, 3, '63bfd4418010c-jepa-1-product.png'),
-(7, 3, '63bfd441832b3-jepa-2-product.png');
+(1, 1, '6482dec54b7b5-Batik Sutra 1 .png'),
+(2, 1, '6482dec551055-Batik Sutra 2.png'),
+(3, 1, '6482dec552005-Batik Sutra 3.png');
 
 -- --------------------------------------------------------
 
@@ -184,11 +181,7 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`transactions_id`, `users_id`, `date_transaction`, `shipping_price`, `total_price`, `unique_code`, `transaction_status`, `resi`) VALUES
-(1, 3, '2023-01-10 07:01:36', 17000, 27813, 813, 'SHIPPING', '4578399'),
-(2, 3, '2023-01-10 07:01:37', 20400, 32287, 887, 'UNPAID', ''),
-(3, 4, '2023-01-12 09:01:42', 59000, 159604, 604, 'RECEIVED', '5454'),
-(4, 3, '2023-01-16 01:01:15', 17000, 117383, 383, 'UNPAID', ''),
-(5, 4, '2023-06-06 08:06:58', 11800, 12949, 149, 'UNPAID', '');
+(1, 2, '2023-06-09 08:06:44', 13800, 311093, 293, 'SHIPPING', '988973bbh');
 
 -- --------------------------------------------------------
 
@@ -200,30 +193,16 @@ CREATE TABLE `transaction_items` (
   `tran_details_id` int(11) NOT NULL,
   `products_id` int(11) NOT NULL,
   `transaction_id` int(11) NOT NULL,
-  `price` int(25) NOT NULL
+  `price` int(25) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaction_items`
 --
 
-INSERT INTO `transaction_items` (`tran_details_id`, `products_id`, `transaction_id`, `price`) VALUES
-(1, 1, 1, 10000),
-(2, 1, 2, 10000),
-(3, 2, 2, 1000),
-(4, 1, 3, 100000),
-(5, 1, 4, 100000),
-(6, 2, 5, 1000);
-
---
--- Triggers `transaction_items`
---
-DELIMITER $$
-CREATE TRIGGER `CREATE_TRANSACTION_UPDATE_STOCK` BEFORE INSERT ON `transaction_items` FOR EACH ROW BEGIN
-	UPDATE products SET stock=stock-1 WHERE products_id=NEW.products_id;
-END
-$$
-DELIMITER ;
+INSERT INTO `transaction_items` (`tran_details_id`, `products_id`, `transaction_id`, `price`, `quantity`) VALUES
+(1, 1, 1, 99000, 3);
 
 -- --------------------------------------------------------
 
@@ -250,10 +229,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`users_id`, `name`, `username`, `phone_number`, `email`, `email_verified_at`, `password`, `provinces_id`, `address`, `zip_code`, `roles`) VALUES
-(2, 'admin', '', '', 'admin@gmail.com', NULL, '$2y$10$eWo.BPshb4I/ab/UPl82oOPNaRIL5Jn2ZYPaKhOq1HJgaoM6cEI8G', 1, '', '', 'ADMIN'),
-(3, 'ahmad afrisal', 'isal', '085341995516', 'ahmadafrisal2002@gmail.com', NULL, '$2y$10$/zGuz7upxvM5.bdDWidfeuJ6BwqImzxGX14tjYoBtkwWFDC5gVx0q', 12, 'Ceppa Desa Botto', '91353', 'USER'),
-(4, 'isal', 'isal22', '085341995516', 'isal@gmail.com', NULL, '$2y$10$albTnwZxNRMxiitYM.A0ZuxOw4DOTgtH/eqCgHS3DPzVrloWGexre', 6, 'klaten', '91353', 'USER'),
-(5, 'ahmad afrisal', '', '', 'aaisal@gmail.com', NULL, '$2y$10$HGQ89J9WMueR.otnEpnPquxvrZPplTDP1XlUqantExtfHbSSB6J/a', 1, '', '', 'USER');
+(1, 'admin', 'mhs', '08534199516', 'admin@gmail.com', NULL, '$2y$10$vwrEDatliszJD4xmAw7K3eGJI1pSaqkpW2g76QIxs50BVzZuOc2vi', 1, 'hh', '91353', 'ADMIN'),
+(2, 'user', 'mhs', '08534199516', 'user@gmail.com', NULL, '$2y$10$re0TbD6e4z7WO2nwodA3v.HjrH/NqKvh0DbqnnRGslTEZnFGf9QxO', 13, 'Jl. Poros Majene Mamuju', '91353', 'USER');
 
 --
 -- Indexes for dumped tables
@@ -323,25 +300,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `carts_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `carts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `galleries_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `galleries_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `provinces`
@@ -353,19 +330,19 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transactions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `transactions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transaction_items`
 --
 ALTER TABLE `transaction_items`
-  MODIFY `tran_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `tran_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

@@ -1,0 +1,39 @@
+Nama Produk :  Batik Sutra Type A01
+Deskripsi : Produk batik sutra Type A001 adalah karya seni yang memadukan keindahan batik tradisional dengan kemewahan sutra. Batik ini dirancang dengan detail yang halus dan motif yang elegan, menciptakan kesan yang anggun dan istimewa.
+Harga : 99000
+Kategori : Batik Sutra
+Berat : 0.5
+Stok : 10
+
+
+Nama Produk : Batik Tulis D01
+Deskripsi : Batik tulis Type D01 adalah bukti nyata dari keindahan dan keahlian tangan para seniman batik. Batik tulis ini dibuat dengan menggunakan teknik tulis yang merupakan salah satu teknik paling kuno dan autentik dalam pembuatan batik. Setiap pola dan motif pada batik ini dihasilkan dengan ketelitian tinggi, melalui proses pembatikan yang dilakukan secara manual.
+Harga : 45000
+Kategori : Batik Tulis
+Berat : 0.3
+Stok : 78
+
+
+Nama Produk :  Batik Jawa Type B01
+Deskripsi : Produk batik Jawa Type B001 adalah representasi yang indah dari kekayaan budaya dan warisan seni batik Jawa. Batik ini menggabungkan teknik tradisional dengan sentuhan modern, menghasilkan hasil akhir yang menakjubkan dan memikat.
+Harga : 76000
+Kategori : Batik Jawa
+Berat : 0,3
+Stok : 20
+
+
+Nama Produk :  Batik Cap Type C01
+Deskripsi : Produk batik cap Type C01 adalah perpaduan yang menawan antara tradisi dan inovasi dalam dunia batik. Batik cap ini dibuat dengan menggunakan teknik cap yang merupakan salah satu teknik tradisional dalam pembuatan batik. Setiap pola dan motif pada batik ini dihasilkan dengan teliti dan hati-hati menggunakan cap tangan yang khas.
+Harga : 85000
+Kategori : Batik Cap
+Berat : 0.2
+Stok : 98
+
+Akun Admin Batikku
+Nama : Admin
+Email :admin@gmail.com
+Password : admin123
+
+user
+user@gmail.com
+user123

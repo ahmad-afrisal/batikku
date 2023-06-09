@@ -34,7 +34,7 @@
           <div class="row">
               <div class="col-lg-12">
                   <div class="breadcrumb_iner">
-                      <h2>cart list</h2>
+                      <h2>Cart</h2>
                   </div>
               </div>
           </div>
@@ -50,146 +50,144 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Product</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Quantity</th>
+                  <th scope="col">Produk</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Banyak</th>
                   <th scope="col">Total</th>
+                  <th scope="col">Menu</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div class="media">
-                      <div class="d-flex">
-                        <img src="img/arrivel/arrivel_1.png" alt="" />
+                <?php
+                  $subProduk = 0;
+
+                  $subTotalProduk = 0;
+                  $BeratSemuaProduk = 0;
+                  $unique_code = (rand(100,999));
+                  $query = mysqli_query($config, "SELECT * FROM carts JOIN products ON carts.products_id=products.products_id  WHERE users_id='$users_id'");
+                  while ($data = mysqli_fetch_array($query)) {
+                    $BeratSemuaProduk += $data['weight'];
+                    $subProduk = $data['quantity'] * $data['price'];
+                    $subTotalProduk += $subProduk;
+                    $productId = $data['products_id'];
+
+                ?>
+                  <tr>
+                    <td >
+                      <div class="media">
+                        <div class="d-flex">
+                        <?php
+                          $queryGaleri = mysqli_query($config, "SELECT photos FROM product_galleries WHERE product_galleries.products_id='$productId' LIMIT 1");
+                          if(mysqli_num_rows($queryGaleri)=== 1) {
+                          while ($dataGaleri = mysqli_fetch_array($queryGaleri)) {
+                        ?>
+                          <img src="images/products/<?= $dataGaleri['photos']; ?>" alt="" />
+                        <?php
+                            }
+                          }
+                        ?>
+                        </div>
+                        <div class="media-body">
+                          <p><?= $data['product_name']; ?></p>
+                        </div>
                       </div>
-                      <div class="media-body">
-                        <p>Minimalistic shop for multipurpose use</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$360.00</h5>
-                  </td>
-                  <td>
-                    <div class="product_count">
-                      <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                        class="input-text qty input-number" />
-                      <button
-                        class="increase input-number-increment items-count" type="button">
-                        <i class="ti-angle-up"></i>
-                      </button>
-                      <button
-                        class="reduced input-number-decrement items-count" type="button">
-                        <i class="ti-angle-down"></i>
-                      </button> -->
-                      <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                      <input class="input-number" type="text" value="1" min="0" max="10">
-                      <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$720.00</h5>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="media">
-                      <div class="d-flex">
-                        <img src="img/arrivel/arrivel_2.png" alt="" />
-                      </div>
-                      <div class="media-body">
-                        <p>Minimalistic shop for multipurpose use</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$360.00</h5>
-                  </td>
-                  <td>
-                    <div class="product_count">
-                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                        <input class="input-number" type="text" value="1" min="0" max="10">
-                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                    </div>
-                  </td>
-                  <td>
-                    <h5>$720.00</h5>
-                  </td>
-                </tr>
+                    </td>
+                    <td>
+                      <h5>Rp. <?= number_format($data['price']); ?></h5>
+                    </td>
+                    <td>
+                      <?= $data['quantity']; ?>
+                    </td>
+                    <td>
+                      <h5>Rp. <?= number_format($subProduk); ?></h5>
+                    </td>
+                    <td>
+                      <form action="" method="POST">
+                        <input type="hidden" name="carts_id" value="<?= $data['carts_id']; ?>">
+                        <button type="submit" name="btnRemove" href="#" class="genric-btn danger radius small">X</button>
+                      </form>
+                    </td>
+                    
+                  </tr>
+                <?php  } ?>
+
+                <!-- Update Keranjang -->
                 <tr class="bottom_button">
-                  <td>
-                    <a class="btn_1" href="#">Update Cart</a>
-                  </td>
                   <td></td>
                   <td></td>
-                  <td>
-                    <div class="cupon_text float-right">
-                      <a class="btn_1" href="#">Close Coupon</a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
+                  <!-- <td></td> -->
                   <td>
                     <h5>Subtotal</h5>
                   </td>
-                  <td>
-                    <h5>$2160.00</h5>
+                  <td colspan="2">
+                    <h5>Rp. <?= number_format($subTotalProduk); ?></h5>
                   </td>
                 </tr>
+
+                <!-- Alamat -->
+                <tr class="shipping_area">
+                <?php
+                    $users_id = $_SESSION['id'];
+                    $alamatIsNull = '';
+                    $query = mysqli_query($config, "SELECT * FROM users JOIN provinces ON users.provinces_id=provinces.provinces_id  WHERE users_id='$users_id'");
+                    while ($x = mysqli_fetch_array($query)) {
+                      $BeratSemuaProduk *= $x['shipping_cost'];
+                      $alamatIsNull = $x['provinces_name'];
+                  ?>
+                  <td colspan="3"> 
+                    <h6>Penerima : <?= $x['name'];?><br>Nomor Handphone : <?= $x['phone_number'];?><br>Alamat Penerima : <?= $x['address'];?>, <?= $x['provinces_name'];?>. <?= $x['zip_code'];?></h6>
+                  </td>
+                  <?php
+                      }
+                    ?>
+                  <td colspan="2">
+                    <div class="shipping_box">
+                        <a class="genric-btn primary-border radius mt-3" href="frontend/dashboard-account.php">Ubah Alamat</a>
+                    </div>
+                  </td>
+                </tr>
+                
+                <form action="cart-store.php" method="post">
+                <!-- Informasi Pembayaran -->
                 <tr class="shipping_area">
                   <td></td>
                   <td></td>
                   <td>
-                    <h5>Shipping</h5>
+                    <h5>Informasi Pembayaran</h5>
                   </td>
-                  <td>
+                  <td colspan="2">
                     <div class="shipping_box">
                       <ul class="list">
                         <li>
-                          Flat Rate: $5.00
-                          <input type="radio" aria-label="Radio button for following text input">
+                          Subtotal Pengiriman: Rp. <?= number_format($BeratSemuaProduk); ?>
+                          <input type="hidden" name="shipping_price" value="<?= $BeratSemuaProduk; ?>">
+
                         </li>
                         <li>
-                          Free Shipping
-                          <input type="radio" aria-label="Radio button for following text input">
+                          Subtotal Produk : Rp. <?= number_format($subTotalProduk); ?>
                         </li>
                         <li>
-                          Flat Rate: $10.00
-                          <input type="radio" aria-label="Radio button for following text input">
+                          Kode Unik: <?= $unique_code; ?>
+                          <input type="hidden" name="unique_code" value="<?= $unique_code; ?>">
+
                         </li>
                         <li class="active">
-                          Local Delivery: $2.00
-                          <input type="radio" aria-label="Radio button for following text input">
+                          Total Pembelian: Rp. <?= number_format($BeratSemuaProduk+$subTotalProduk+$unique_code); ?>
+                          <input type="hidden" name="total_price" value="<?= ($BeratSemuaProduk+$subTotalProduk+$unique_code); ?>">
                         </li>
                       </ul>
-                      <h6>
-                        Calculate Shipping
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                      </h6>
-                      <select class="shipping_select">
-                        <option value="1">Bangladesh</option>
-                        <option value="2">India</option>
-                        <option value="4">Pakistan</option>
-                      </select>
-                      <select class="shipping_select section_bg">
-                        <option value="1">Select a State</option>
-                        <option value="2">Select a State</option>
-                        <option value="4">Select a State</option>
-                      </select>
-                      <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                      <a class="btn_1" href="#">Update Details</a>
+                      <?php if($alamatIsNull=='Default') {
+                        echo '<a class="btn_1 mt-4" href="frontend/dashboard-account.php">Ubah Alamat</a>';
+                      } else { 
+                        echo '<button type="submit" class="btn_1 mt-4" href="#">Buat Pesanan</button>';
+                      } ?>
                     </div>
                   </td>
                 </tr>
+                </form>
+
               </tbody>
             </table>
-            <div class="checkout_btn_inner float-right">
-              <a class="btn_1" href="#">Continue Shopping</a>
-              <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
-            </div>
           </div>
         </div>
     </section>
@@ -198,6 +196,20 @@
     <?php include('layouts/footer.php'); ?>
 
     <?php include('layouts/script.php'); ?>
+    <script>
+      // Fungsi untuk menghitung total
+      function calculateTotal() {
+        var quantity = parseInt(document.getElementById("quantity").value);
+        var price = parseInt(document.getElementById("price").value);
+        
+        var total = quantity * price;
+        
+        document.getElementById("total").innerHTML = "Total: " + total;
+      }
+      
+      // Memanggil fungsi calculateTotal() saat nilai kuantitas berubah
+      document.getElementById("quantity").addEventListener("change", calculateTotal);
+  </script>
 
 </body>
 

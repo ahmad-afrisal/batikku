@@ -1,4 +1,4 @@
-    <link rel="icon" href="user/img/favicon.png">
+    <link rel="icon" href="user/img/logo.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="user/css/bootstrap.min.css">
     <!-- animate CSS -->

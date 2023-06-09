@@ -59,7 +59,7 @@
           <div class="section-content section-dashboard-home" data-aos="fade-up">
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">#TRI.<?= $_GET['transaction_id']; ?></h2>
+                <h2 class="dashboard-title">#BA.<?= $_GET['transaction_id']; ?></h2>
                 <p class="dashboard-subtitle">
                   Detail Pesanan
                 </p>
@@ -156,7 +156,7 @@
                             <div class="row">
                             <?php
                               
-                              $oke = mysqli_query($config, "SELECT  transaction_items.products_id, product_name, transaction_items.price FROM transaction_items 
+                              $oke = mysqli_query($config, "SELECT  transaction_items.products_id, product_name, quantity, transaction_items.price FROM transaction_items 
                                                               JOIN products ON products.products_id=transaction_items.products_id 
                                                               WHERE transaction_id='$transaction_id'");
                               while($data = mysqli_fetch_array($oke)) {
@@ -187,7 +187,7 @@
                                         <?= 'Rp. '.number_format($data['price']); ?>
                                       </div>
                                       <div class="col-md-1 d-none d-md-block">
-                                          x 1
+                                          x <?= $data['quantity']; ?>
                                       </div>
                                     </div>
                                   </div>

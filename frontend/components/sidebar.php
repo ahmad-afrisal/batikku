@@ -9,7 +9,7 @@
         <a href="dashboard.php" class="list-group-item list-group-item-action active">Dashboard</a>
         <a href="dashboard-transactions.php" class="list-group-item list-group-item-action">Pesanan</a>
         <a href="dashboard-account.php" class="list-group-item list-group-item-action">Akun</a>
-        <a href="../logout.php" class="list-group-item list-group-item-action">Sign Up</a>
+        <a href="../logout.php" class="list-group-item list-group-item-action">Keluar</a>
     </div>
 </div>
 <!-- End Sidebar -->

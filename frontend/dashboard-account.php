@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Triasih</title>
+  <title>Batikku</title>
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link href="../style/main.css" rel="stylesheet" />
@@ -33,7 +33,7 @@
               <a href="dashboard.php" class="list-group-item list-group-item-action">Dashboard</a>
               <a href="dashboard-transactions.php" class="list-group-item list-group-item-action">Pesanan</a>
               <a href="dashboard-account.php" class="list-group-item list-group-item-action active">Akun</a>
-              <a href="../logout.php" class="list-group-item list-group-item-action">Sign Up</a>
+              <a href="../logout.php" class="list-group-item list-group-item-action">Keluar</a>
             </div>
         </div>
       <!-- End Sidebar -->

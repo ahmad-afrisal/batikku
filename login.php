@@ -37,22 +37,7 @@ if (isset($_POST["submit"])) {
 }
 
 
-if(isset($_SESSION['message']))
-{
-    ?>
-        <div class="toast-container align-items-center text-bg-primary border-0 position-fixed top-0 start-50 translate-middle-x">
-          <div id="liveToast" class="toast " role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-              <div class="toast-body">
-                <?= $_SESSION['message']; ?>
-              </div>
-              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-          </div>
-        </div>
-          <?php 
-    unset($_SESSION['message']);
-}
+
 
 ?>
 
@@ -64,7 +49,7 @@ if(isset($_SESSION['message']))
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>pillloMart</title>
+    <title>Batikku</title>
     <?php include('layouts/style.php'); ?>
 </head>
 
@@ -101,6 +86,18 @@ if(isset($_SESSION['message']))
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
+                            <?php 
+                                if(isset($_SESSION['message']))
+                                {
+                                    ?>
+                                        <blockquote class="generic-blockquote">
+                                        <?= $_SESSION['message']; ?>
+                                                        </blockquote>
+                                    <?php 
+                                    unset($_SESSION['message']);
+                                }
+                            ?>
+
                             <h3>Selamat Datang Kembali ! <br>
                                 Silahkan Login</h3>
                                 <?php if(isset($error)) : ?>

@@ -5,7 +5,9 @@
 
   if(isset($_POST['addChart'])) {
     $users_id = $_SESSION['id'];
-    mysqli_query($config, "INSERT INTO carts VALUES (NULL, '$users_id', '$products_id')");
+    $quantity = $_POST['quantity'];
+
+    mysqli_query($config, "INSERT INTO carts VALUES (NULL, '$users_id', '$products_id', '$quantity')");
     header('Location:cart.php');
   }
 
@@ -47,15 +49,16 @@
         <div class="row justify-content-center">
           <div class="col-lg-12">
             <div class="product_img_slide owl-carousel">
+            <?php
+              $query = mysqli_query($config, "SELECT * FROM product_galleries WHERE products_id='$products_id'");
+              while ($data = mysqli_fetch_array($query)) {
+            ?>
               <div class="single_product_img">
-                <img src="user/img/product/single_product.png" alt="#" class="img-fluid">
+                <img src="images/products/<?= $data['photos']; ?>" alt="#" class="img-fluid">
               </div>
-              <div class="single_product_img">
-                <img src="user/img/product/single_product.png" alt="#" class="img-fluid">
-              </div>
-              <div class="single_product_img">
-                <img src="user/img/product/single_product.png" alt="#" class="img-fluid">
-              </div>
+            <?php
+              }
+            ?>
             </div>
           </div>
           <div class="col-lg-8">
@@ -65,23 +68,36 @@
                 while ($data = mysqli_fetch_array($query)) {
               ?>
               <h3><?= $data['product_name']; ?></h3>
+              <h4>Rp. <?= number_format($data['price']); ?></h4>
               <p>
-              <?= $data['description']; ?>
+              <?= $data['description']; ?>, <strong>Berat Produk : <?= $data['weight']; ?> Kg</strong>
               </p>
+              <form action="" method="POST">
               <div class="card_area">
-                  <div class="product_count_area">
-                      <p>Quantity</p>
-                      <div class="product_count d-inline-block">
-                          <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                          <input class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                          <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
-                      </div>
-                      <p>Rp. <?= number_format($data['price']); ?></p>
-                  </div>
+                <div class="product_count_area">
+                    <p>Quantity</p>
+                    <div class="product_count d-inline-block">
+                        <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
+                        <input class="product_count_item input-number" name="quantity" type="text" value="1" min="1" max="10">
+                        <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                    </div>
+
+                    <p>Stock : <?= $data['stock']; ?></p>
+                    <p id="result"></p>
+                </div>
                 <div class="add_to_cart">
-                    <a href="#" class="btn_3">add to cart</a>
+                  <?php
+                    if(isset($_SESSION["login"])) {
+                  ?>
+                 
+                      <button type="submit" name="addChart" href="#" class="btn_3">Tambah ke Keranjang</button>
+                  
+                  <?php } else { ?>
+                    <a href="login.php" class="btn_3">Sign in</a>
+                  <?php } ?>
                 </div>
               </div>
+              </form>
               <?php } ?>
             </div>
           </div>

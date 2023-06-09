@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Triasih</title>
+  <title>Batikku</title>
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link href="../../style/main.css" rel="stylesheet" />
@@ -33,7 +33,7 @@
               <a href="dashboard.php" class="list-group-item list-group-item-action">Dashboard</a>
               <a href="dashboard-transactions.php" class="list-group-item list-group-item-action active">Pesanan</a>
               <a href="dashboard-account.php" class="list-group-item list-group-item-action ">Akun</a>
-              <a href="../logout.php" class="list-group-item list-group-item-action">Sign Up</a>
+              <a href="../logout.php" class="list-group-item list-group-item-action">Keluar</a>
             </div>
         </div>
       <!-- End Sidebar -->
@@ -49,7 +49,7 @@
           <div class="section-content section-dashboard-home mt-0" data-aos="fade-up">
             <div class="container-fluid">
               <div class="dashboard-heading">
-                <h2 class="dashboard-title">#TRI.<?= $_GET['transaction_id']; ?></h2>
+                <h2 class="dashboard-title">#BA.<?= $_GET['transaction_id']; ?></h2>
                 <p class="dashboard-subtitle">
                   Detail Pesanan
                 </p>
@@ -115,7 +115,7 @@
                               </div>
                               <div class="col-12 mt-2">
                                 <div class="product-title">Selesaikan Pembayaran dengan transfer ke :<br>
-                                  <b>BANK BRI > A.n Triasih > No. Rekening 0047-8862-8373</b>
+                                  <b>BANK BRI > A.n Batikku > No. Rekening 0047-8862-8373</b>
                                 </div>
                               </div>
                             </div>
@@ -130,7 +130,7 @@
                             <div class="row">
                             <?php
                               
-                                $oke = mysqli_query($config, "SELECT  transaction_items.products_id, product_name, transaction_items.price FROM transaction_items 
+                                $oke = mysqli_query($config, "SELECT  transaction_items.products_id, product_name, transaction_items.price, quantity FROM transaction_items 
                                                                 JOIN products ON products.products_id=transaction_items.products_id 
                                                                 WHERE transaction_id='$transaction_id'");
                                 while($data = mysqli_fetch_array($oke)) {
@@ -162,7 +162,7 @@
                                         <?= 'Rp. '.number_format($data['price']); ?>
                                       </div>
                                       <div class="col-md-1 d-none d-md-block">
-                                          x 1
+                                          x <?= $data['quantity']; ?>
                                       </div>
                                     </div>
                                   </div>

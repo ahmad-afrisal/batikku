@@ -11597,8 +11597,8 @@ footer p {
   color: #c5c5c5;
 }
 .page-dashboard .list-group-item.active {
-  background: linear-gradient(270deg, rgba(255, 113, 88, 0.32) 2%, rgba(255, 255, 255, 0) 100%);
-  border-right: 4px solid #ff7158;
+  background: linear-gradient(270deg, rgba(185, 112, 214, 0.32) 2%, rgba(255, 255, 255, 0) 100%);
+  border-right: 4px solid #2a2a2a;
   color: #0c0d36;
 }
 @media (min-width: 768px) {

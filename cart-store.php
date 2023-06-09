@@ -16,17 +16,21 @@ $queryIDTransactions = mysqli_query($config, "SELECT transactions_id FROM transa
 $row = mysqli_fetch_row($queryIDTransactions);
 $trans_id = $row[0];
 
-$queryProduct = mysqli_query($config, "SELECT products.products_id, price  FROM carts  JOIN products ON carts.products_id=products.products_id WHERE users_id='$users_id'");
+$queryProduct = mysqli_query($config, "SELECT products.products_id, price, quantity  FROM carts  JOIN products ON carts.products_id=products.products_id WHERE users_id='$users_id'");
 while($data = mysqli_fetch_array($queryProduct)) {
     $products_id = $data['products_id'];
     $price = $data['price'];
-    mysqli_query($config, "INSERT INTO `transaction_items` (`tran_details_id`, `products_id`, `transaction_id`, `price`) 
-                    VALUES (NULL, '$products_id', '$trans_id', '$price')");
+    $quantity = $data['quantity'];
+    mysqli_query($config, "INSERT INTO `transaction_items` (`tran_details_id`, `products_id`, `transaction_id`, `price`, `quantity`) 
+                    VALUES (NULL, '$products_id', '$trans_id', '$price', '$quantity')");
 }
+
+// update data product
+// mysqli_query($config,"update products set stock='$sold' where id='$id'");
 
 mysqli_query($config, "DELETE FROM carts WHERE users_id='$users_id'");
 
-header('Location:success.php');
+header('Location:success.php?transaction_id='.$trans_id);
 
 // BELUM BAYAR | PROSES | DIBATALKAN | DIKIRIM | DITERIMA | DIKEMBALIKAN
 // UNPAID | PROCESS | CANCELED | SHIPPING | RECEIVED | RETURN

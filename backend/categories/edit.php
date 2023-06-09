@@ -6,23 +6,8 @@
   <div class="page-dashboard">
     <!-- <div class="d-flex" id="wrapper" data-aos="fade-right"> kalo pake class d-flex-->
     <div class="d-flex"  id="wrapper" data-aos="fade-right">
-      <!-- Sidebar -->
-      <div class="border-right" id="sidebar-wrapper">
-          <div class="sidebar-heading text-center">
-            <img src="../../images/dashboard-logo.png" alt="" srcset="" class="my-4" width="120px">
-          </div>
-          <div class="list-group list-group-flush">
-            <a href="" class="list-group-item list-group-item-action ">Dashboard</a>
-            <a href="../products/index.php" class="list-group-item list-group-item-action">Produk</a>
-            <a href="../transactions/index.php" class="list-group-item list-group-item-action">Transaksi</a>
-            <a href="../categories/" class="list-group-item list-group-item-action active">Kategori</a>
-            <a href="../pelanggan/" class="list-group-item list-group-item-action">Pelanggan</a>
-            <a href="../account/" class="list-group-item list-group-item-action">Ongkos Kirim</a>
-            <a href="../account/dashboard-account.php" class="list-group-item list-group-item-action">Akun</a>
-            <a href="../../logout.php" class="list-group-item list-group-item-action">Sign Up</a>
-          </div>
-        </div>
-      <!-- End Sidebar -->
+    <?php include '../components/sidebar.php' ?>
+
 
       <!-- Page Content -->
         <div id="page-content-wrapper">

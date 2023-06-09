@@ -21,12 +21,12 @@
      </div>
           <div class="list-group list-group-flush">
           <a href="../dashboard/dashboard.php" class="list-group-item list-group-item-action <?= $active == 'dashboard' ? 'active' : ''; ?>">Dashboard</a>
-          <a href="../products/" class="list-group-item list-group-item-action <?= $active == 'products' ? 'active' : ''; ?>">Produk</a>
-          <a href="../transactions/" class="list-group-item list-group-item-action <?= $active == 'transactions' ? 'active' : ''; ?>">Transaksi</a>
-          <a href="../categories/" class="list-group-item list-group-item-action <?= $active == 'categories' ? 'active' : ''; ?>">Kategori</a>
-          <a href="../pelanggan/" class="list-group-item list-group-item-action <?= $active == 'pelanggan' ? 'active' : ''; ?>">Pelanggan</a>
-          <a href="../provinces/" class="list-group-item list-group-item-action <?= $active == 'provinces' ? 'active' : ''; ?>">Ongkos Kirim</a>
+          <a href="../products/index.php" class="list-group-item list-group-item-action <?= $active == 'products' ? 'active' : ''; ?>">Produk</a>
+          <a href="../transactions/index.php" class="list-group-item list-group-item-action <?= $active == 'transactions' ? 'active' : ''; ?>">Transaksi</a>
+          <a href="../categories/index.php" class="list-group-item list-group-item-action <?= $active == 'categories' ? 'active' : ''; ?>">Kategori</a>
+          <a href="../pelanggan/index.php" class="list-group-item list-group-item-action <?= $active == 'pelanggan' ? 'active' : ''; ?>">Pelanggan</a>
+          <a href="../provinces/index.php" class="list-group-item list-group-item-action <?= $active == 'provinces' ? 'active' : ''; ?>">Ongkos Kirim</a>
           <a href="../account/dashboard-account.php" class="list-group-item list-group-item-action <?= $active == 'account' ? 'active' : ''; ?>">Akun</a>
-          <a href="../../logout.php" class="list-group-item list-group-item-action">Sign Up</a>
+          <a href="../../logout.php" class="list-group-item list-group-item-action">Logout</a>
      </div>
 </div>

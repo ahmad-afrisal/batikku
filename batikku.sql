@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 09, 2023 at 08:31 AM
+-- Generation Time: Jun 09, 2023 at 12:49 PM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.9
 
@@ -53,10 +53,9 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`categories_id`, `name_category`, `slug`, `photo`) VALUES
 (1, 'Batik Tulis', 'batik-tulis', '457934551_4.png'),
-(2, 'Batik Cap', 'batik-cap', '4410149_1.png'),
 (3, 'Batik Sutra', 'batik-sutra', '1796539152_3.png'),
 (4, 'Batik Jawa', 'batik-jawa', '808887569_8.png'),
-(5, 'Batik Tulis', 'batik-tulis', '970770525_1.png');
+(5, 'Batik Cap', 'batik-cap', '970770525_1.png');
 
 -- --------------------------------------------------------
 
@@ -80,7 +79,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`products_id`, `product_name`, `slug`, `categories_id`, `price`, `description`, `weight`, `stock`) VALUES
-(1, 'Batik Sutra Type A01', 'batik-sutra-type-a01', 3, 99000, '<p>Produk batik sutra Type A001 adalah karya seni yang memadukan keindahan batik tradisional dengan kemewahan sutra. Batik ini dirancang dengan detail yang halus dan motif yang elegan, menciptakan kesan yang anggun dan istimewa.</p>\r\n', 0.3, 10);
+(1, 'Batik Sutra Type A01', 'batik-sutra-type-a01', 3, 99000, '<p>Produk batik sutra Type A001 adalah karya seni yang memadukan keindahan batik tradisional dengan kemewahan sutra. Batik ini dirancang dengan detail yang halus dan motif yang elegan, menciptakan kesan yang anggun dan istimewa.</p>\r\n', 0.3, 10),
+(2, 'Batik Tulis Type D01', 'batik-tulis-type-d01', 1, 45000, '<p>Batik tulis Type D01 adalah bukti nyata dari keindahan dan keahlian tangan para seniman batik. Batik tulis ini dibuat dengan menggunakan teknik tulis yang merupakan salah satu teknik paling kuno dan autentik dalam pembuatan batik. Setiap pola dan motif pada batik ini dihasilkan dengan ketelitian tinggi, melalui proses pembatikan yang dilakukan secara manual.</p>\r\n', 0.3, 78),
+(3, 'Batik Jawa Type B01', 'batik-jawa-type-b01', 4, 76000, '<p>Produk batik Jawa Type B001 adalah representasi yang indah dari kekayaan budaya dan warisan seni batik Jawa. Batik ini menggabungkan teknik tradisional dengan sentuhan modern, menghasilkan hasil akhir yang menakjubkan dan memikat.</p>\r\n', 0.3, 20),
+(4, 'Batik Cap Type C01', 'batik-cap-type-c01', 5, 85000, '<p>Produk batik cap Type C01 adalah perpaduan yang menawan antara tradisi dan inovasi dalam dunia batik. Batik cap ini dibuat dengan menggunakan teknik cap yang merupakan salah satu teknik tradisional dalam pembuatan batik. Setiap pola dan motif pada batik ini dihasilkan dengan teliti dan hati-hati menggunakan cap tangan yang khas.</p>\r\n', 0.2, 98);
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,16 @@ CREATE TABLE `product_galleries` (
 INSERT INTO `product_galleries` (`galleries_id`, `products_id`, `photos`) VALUES
 (1, 1, '6482dec54b7b5-Batik Sutra 1 .png'),
 (2, 1, '6482dec551055-Batik Sutra 2.png'),
-(3, 1, '6482dec552005-Batik Sutra 3.png');
+(3, 1, '6482dec552005-Batik Sutra 3.png'),
+(4, 2, '64831db4ae35f-Batik Tulis 1.png'),
+(5, 2, '64831db4af14d-Batik Tulis 2.png'),
+(6, 2, '64831db4b0472-Batik Tulis 3.png'),
+(8, 3, '64831dff7c9b1-Batik Jawa 1.png'),
+(9, 3, '64831dff7f87b-Batik Jawa 2.png'),
+(10, 3, '64831dff85b64-Batik Jawa 4.png'),
+(11, 4, '64831e5240350-Batik Cap 1.png'),
+(12, 4, '64831e5242c8b-Batik Cap 2.png'),
+(13, 4, '64831e5243ff3-Batik Cap 3.png');
 
 -- --------------------------------------------------------
 
@@ -181,7 +192,7 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`transactions_id`, `users_id`, `date_transaction`, `shipping_price`, `total_price`, `unique_code`, `transaction_status`, `resi`) VALUES
-(1, 2, '2023-06-09 08:06:44', 13800, 311093, 293, 'SHIPPING', '988973bbh');
+(2, 3, '2023-06-09 12:06:55', 8500, 377465, 965, 'UNPAID', '');
 
 -- --------------------------------------------------------
 
@@ -202,7 +213,8 @@ CREATE TABLE `transaction_items` (
 --
 
 INSERT INTO `transaction_items` (`tran_details_id`, `products_id`, `transaction_id`, `price`, `quantity`) VALUES
-(1, 1, 1, 99000, 3);
+(2, 1, 2, 99000, 2),
+(3, 4, 2, 85000, 2);
 
 -- --------------------------------------------------------
 
@@ -230,7 +242,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`users_id`, `name`, `username`, `phone_number`, `email`, `email_verified_at`, `password`, `provinces_id`, `address`, `zip_code`, `roles`) VALUES
 (1, 'admin', 'mhs', '08534199516', 'admin@gmail.com', NULL, '$2y$10$vwrEDatliszJD4xmAw7K3eGJI1pSaqkpW2g76QIxs50BVzZuOc2vi', 1, 'hh', '91353', 'ADMIN'),
-(2, 'user', 'mhs', '08534199516', 'user@gmail.com', NULL, '$2y$10$re0TbD6e4z7WO2nwodA3v.HjrH/NqKvh0DbqnnRGslTEZnFGf9QxO', 13, 'Jl. Poros Majene Mamuju', '91353', 'USER');
+(2, 'user', 'mhs', '08534199516', 'user@gmail.com', NULL, '$2y$10$re0TbD6e4z7WO2nwodA3v.HjrH/NqKvh0DbqnnRGslTEZnFGf9QxO', 13, 'Jl. Poros Majene Mamuju', '91353', 'USER'),
+(3, 'ahmad afrisal', 'isal', '08534199515', 'ahmadafrisal2002@gmail.com', NULL, '$2y$10$3UM6x2ANwlmjQtRTVP4pzOGhHS0OueLaO5mOXyh.DatGY.hIk00va', 12, 'Jl. Poros Majene Mamuju No 3', '91353', 'USER');
 
 --
 -- Indexes for dumped tables
@@ -300,7 +313,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `carts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `carts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -312,13 +325,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `products_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product_galleries`
 --
 ALTER TABLE `product_galleries`
-  MODIFY `galleries_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `galleries_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `provinces`
@@ -330,19 +343,19 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transactions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `transactions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transaction_items`
 --
 ALTER TABLE `transaction_items`
-  MODIFY `tran_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tran_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

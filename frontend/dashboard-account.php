@@ -126,7 +126,7 @@
                             </div>
                             <div class="row">
                               <div class="col text-end">
-                                <button type="submit" name="submit" class="btn btn-success px-5">Save Now</button>
+                                <button type="submit" name="submit" class="btn btn-success px-5">Simpan</button>
                               </div>
                             </div>
                           </div>

@@ -92,7 +92,11 @@
                           <?php
                             $query = mysqli_query($config, "SELECT sum(total_price) AS totalRevenue FROM transactions");
                             while ($data = mysqli_fetch_array($query)) {
-                              echo 'Rp. '.number_format($data['totalRevenue']);
+                              if($data['totalRevenue'] > 0) {
+                                echo 'Rp. '.number_format($data['totalRevenue']);
+                              } else {
+                                echo 'Rp. 0';
+                              }
                             }
                           ?>
                         </div>
